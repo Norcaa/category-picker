@@ -11,6 +11,8 @@
 
 ul, li {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .mat-tree-node {
@@ -57,9 +59,7 @@ ul, li {
     right: 30px;
 }
 
-li.tree-container {
-    border: 0;
-}
+/*
 
 .tree-line-vertical {
     background-color: #fff;
@@ -87,44 +87,46 @@ li.tree-container {
 
 }
 
+*/
+
+
 /* border */
-/*vertical*/
-/*
+  
 li.tree-container {
     border-bottom: 0;
 }
+
 ul { 
-    padding-left: 40px; 
+    padding-left: 60px; 
+}
+  
+li { 
+    padding-left: 20px;  
+    border: 2px solid #fff;
+    border-width: 0 0 1px 1px; 
+    position: relative;
+    top: -14px; 
 }
 
-li { 
-    padding-left: 15px;  
-    border: 2px solid #F2F2F2;
-    border-width: 0 0 1px 2px; 
+li.mat-tree-node,
+li div { 
+    margin: 0;
     position: relative;
+    top: 14px; 
 }
-/*horizontal*/
-/*
+
 li ul {
-    border-top: 2px solid #F2F2F2;
-    margin-left: -40px;
-    padding-left: 58px;
+    border-top: 2px solid #fff;
+
+    margin-left: -20px;
+    padding-left: 39px;
 }
+  
 .mat-nested-tree-node:last-child ul {
-    border-left: 2px solid #F2F2F2;
-    margin-left: -41px;
+    border-left: 2px solid white;
+    margin-left: -21px;
 }
 
 .mat-icon-button {
-  z-index: 100;
+    z-index: 100;
 }
-
-.tree-structure {
-    border: 2px solid red;
-    content: "";
-    width: 50%;
-    height: 28px;
-    position: absolute;
-    top: 14px;
-    left: 35px;
-}*/
