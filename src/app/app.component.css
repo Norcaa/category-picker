@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.main-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+header {
+    position: relative;
+    width: 322px;
+    height: 34px;
+    margin: 10px;
+    padding: 10px 145px;
+
+    background: #232323;
+    border-radius: 4px;
+}
+
+header h1 {
+    color: #F2F2F2;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+body {
+    position: relative;
+    width: 612px;
+    height: 770px;
+    margin: 10px;
+
+    background: #232323;
+    border-radius: 4px;
+}
+
+input {
+    margin: 16px 19px 0px 18px;
+    padding: 5px;
+    width: 575px;
+    background: #232323;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+
+    color: #F2F2F2;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #828282;
+}
+::-webkit-scrollbar-thumb {
+    background: #E0E0E0;
+}
+
+/* Buttons */
+.buttons .previous-button,
+.buttons .next-button {
+    border: 1px solid #F2F2F2;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    color: #F2F2F2;
+    height: 40px;
+    padding: 8px 32px;
+    margin: 16px 8px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0px;
+}
+
+.buttons .previous-button {
+    background: #333333;
+    width: 136px;
+    left: 0%;
+}
+
+.buttons .next-button {
+    background: #0400D1;
+    width: 102px;
+    right: 0px;
+}
+
