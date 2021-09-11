@@ -24,6 +24,10 @@ ul, li {
     margin-bottom: 3px;
 }
 
+.mat-tree-node .button {
+    background-color: #4F4F4F;
+}
+
 .text {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -53,6 +57,35 @@ ul, li {
     right: 30px;
 }
 
+li.tree-container {
+    border: 0;
+}
+
+.tree-line-vertical {
+    background-color: #fff;
+    transform: rotate(90deg);
+    width: 29px; 
+    height: 2px;
+    color: #fff;
+    border: 0;
+
+    position: absolute;
+    left: -35px;
+    top: -7.5px;
+}
+
+.tree-line-horizontal {
+    background-color: #fff;
+    width: 20px; 
+    height: 2px;
+    color: #fff;
+    border: 0;
+
+    position: absolute;
+    left: -20px;
+    top: 6px;
+
+}
 
 /* border */
 /*vertical*/
@@ -63,24 +96,16 @@ li.tree-container {
 ul { 
     padding-left: 40px; 
 }
+
 li { 
-    padding-left: 15px; 
-    height: 38px; 
+    padding-left: 15px;  
     border: 2px solid #F2F2F2;
     border-width: 0 0 1px 2px; 
     position: relative;
-    top: -24px;
 }
-li.mat-tree-node,
-li div { 
-    margin: 0;
-    position: relative;
-    top: 24px; 
-}*/
 /*horizontal*/
 /*
 li ul {
-    background-color: red;
     border-top: 2px solid #F2F2F2;
     margin-left: -40px;
     padding-left: 58px;
@@ -92,5 +117,14 @@ li ul {
 
 .mat-icon-button {
   z-index: 100;
-}*/
+}
 
+.tree-structure {
+    border: 2px solid red;
+    content: "";
+    width: 50%;
+    height: 28px;
+    position: absolute;
+    top: 14px;
+    left: 35px;
+}*/

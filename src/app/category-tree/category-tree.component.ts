@@ -64,6 +64,8 @@ const TREE_DATA = [
 })
 export class CategoryTreeComponent implements OnInit {
 
+  checkboxStatus = "check_box_outline_blank";
+
   recursive: boolean = false;
   levels = new Map<CategoryNode, number>();
   treeControl: NestedTreeControl<CategoryNode>;
@@ -86,5 +88,13 @@ export class CategoryTreeComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  setCheckbox() {
+    if (this.checkboxStatus == "check_box_outline_blank") {
+      this.checkboxStatus = "check_box";
+    } else {
+      this.checkboxStatus = "check_box_outline_blank";
+    }
+  }
 
 }
