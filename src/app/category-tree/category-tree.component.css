@@ -46,7 +46,7 @@ ul, li {
 .checkbox-rightside {
     color: #F2F2F2;
     position: absolute;
-    right: -5px;
+    right: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
