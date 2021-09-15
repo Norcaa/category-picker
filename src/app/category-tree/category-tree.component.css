@@ -41,6 +41,9 @@ ul, li {
     align-items: center;
     text-transform: capitalize;
 }
+ul {
+    padding-left: 30px;
+}
 
 /* rightside */
 .checkbox-rightside {
@@ -59,74 +62,40 @@ ul, li {
     right: 30px;
 }
 
-/*
-
-.tree-line-vertical {
-    background-color: #fff;
-    transform: rotate(90deg);
-    width: 29px; 
-    height: 2px;
-    color: #fff;
-    border: 0;
-
-    position: absolute;
-    left: -35px;
-    top: -7.5px;
-}
-
-.tree-line-horizontal {
-    background-color: #fff;
-    width: 20px; 
-    height: 2px;
-    color: #fff;
-    border: 0;
-
-    position: absolute;
-    left: -20px;
-    top: 6px;
-
-}
-
-*/
-
-
 /* border */
-  
-li.tree-container {
-    border-bottom: 0;
+.tree-container {
+  position: relative;
+}
+ul.tree-nested-node::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 15px;
+  left: 19px;
+  display: block;
+  width: 0;
+  border-left: 2px solid #fff;
+}
+ul.tree-nested-node:last-child {
+  border: none;
+}
+.mat-tree-node:after {
+  position: absolute;
+  top: 0;
+  left: -11px;
+  display: block;
+  height: 12px;
+  width: 9px;
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+  content: '';
+}
+ul.tree-nested-node:nth-child() { 
+border: 0; 
 }
 
-ul { 
-    padding-left: 60px; 
-}
-  
-li { 
-    padding-left: 20px;  
-    border: 2px solid #fff;
-    border-width: 0 0 1px 1px; 
-    position: relative;
-    top: -14px; 
-}
-
-li.mat-tree-node,
-li div { 
-    margin: 0;
-    position: relative;
-    top: 14px; 
-}
-
-li ul {
-    border-top: 2px solid #fff;
-
-    margin-left: -20px;
-    padding-left: 39px;
-}
-  
-.mat-nested-tree-node:last-child ul {
-    border-left: 2px solid white;
-    margin-left: -21px;
-}
-
-.mat-icon-button {
-    z-index: 100;
+#c2 {
+  position: absolute;
+  top: 10px;
+  left: 30px
 }
