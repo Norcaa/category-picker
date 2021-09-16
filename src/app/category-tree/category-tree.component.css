@@ -66,7 +66,8 @@ ul {
 .tree-container {
   position: relative;
 }
-ul.tree-nested-node::before {
+
+.tree-container::before {
   content: "";
   position: absolute;
   top: 28px;
@@ -76,10 +77,33 @@ ul.tree-nested-node::before {
   width: 0;
   border-left: 2px solid #fff;
 }
-ul.tree-nested-node:last-child {
-  border: none;
+
+ul div mat-nested-tree-node:last-child  {
+  border: 0;
 }
-.mat-tree-node:after {
+
+ul::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 14px;
+  bottom: 15px;
+}
+
+mat-nested-tree-node mat-nested-tree-node:last-child ul::before, 
+mat-nested-tree-node mat-nested-tree-node  mat-nested-tree-node:last-child ul::before {
+  border-left: 2px solid #232323;
+}
+
+mat-nested-tree-node mat-nested-tree-node  mat-nested-tree-node mat-nested-tree-node ul::before {
+  border-left: 2px solid #fff;
+}
+
+mat-nested-tree-node mat-nested-tree-node  mat-nested-tree-node mat-nested-tree-node:last-child ul::before {
+  border-left: 2px solid #232323;
+}
+
+mat-nested-tree-node > li ul li .mat-tree-node:after {
   position: absolute;
   top: 0;
   left: -11px;
@@ -90,12 +114,7 @@ ul.tree-nested-node:last-child {
   border-left: 2px solid #fff;
   content: '';
 }
-ul.tree-nested-node:nth-child() { 
-border: 0; 
-}
 
-#c2 {
-  position: absolute;
-  top: 10px;
-  left: 30px
+mat-tree > mat-nested-tree-node > li .mat-tree-node:after {
+  border: 0;
 }
