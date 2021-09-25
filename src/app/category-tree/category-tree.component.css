@@ -26,6 +26,14 @@ ul, li {
     margin-bottom: 3px;
 }
 
+.disable-grey {
+  
+}
+
+.active-blue {
+  background-color: #0400D1;
+}
+
 .mat-tree-node .button {
     background-color: #4F4F4F;
 }

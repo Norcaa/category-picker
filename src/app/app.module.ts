@@ -5,9 +5,11 @@ import { MaterialModule } from 'material.module';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CategoryTreeComponent } from './category-tree/category-tree.component';
+import { CategoryDatabase, CategoryTreeComponent } from './category-tree/category-tree.component';
 
 import { MatTreeModule } from '@angular/material/tree';
+import { CatergoryTreeService } from './services/catergory-tree.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,10 +20,13 @@ import { MatTreeModule } from '@angular/material/tree';
     BrowserModule,
     MaterialModule,
     BrowserAnimationsModule,
-    MatTreeModule
+    MatTreeModule,
+    HttpClientModule
   ],
-  
-  providers: [],
+  providers: [
+    CatergoryTreeService,
+    CategoryDatabase
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
