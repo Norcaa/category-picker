@@ -24,6 +24,7 @@ ul, li {
     height: 28px;
     max-width: 575px;
     margin-bottom: 3px;
+    transition: 0.5s;
 }
 
 .disable-grey {

@@ -9,7 +9,9 @@
             <mat-icon>close</mat-icon>
           </button>
           <span class="text">{{node.name}}</span>
-          <mat-checkbox class="checkbox-rightside" color="white" (change)="isChecked(node)"></mat-checkbox>
+          <mat-checkbox class="checkbox-rightside" color="white" 
+            (change)="todoLeafItemSelectionToggle(node)"
+            [checked]="node.selected"></mat-checkbox>
         </div>
       </li>
     </mat-nested-tree-node>
@@ -29,7 +31,8 @@
 
     <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChildren">
       <li class="tree-container">
-        <div class="mat-tree-node" [ngStyle]="{'background-color': (node.selected  ? '#0400D1' : '#4F4F4F')}">
+        <div class="mat-tree-node" [ngStyle]="{'background-color': (node.selected  ? '#0400D1' : '#4F4F4F')}"
+        [ngStyle]="{'border': (descendantsPartiallySelected(node) ? '1px solid #0400D1' : 'none')}">
           <button mat-icon-button matTreeNodeToggle>
             <mat-icon>code</mat-icon>
           </button>
@@ -39,7 +42,10 @@
               {{treeControl.isExpanded(node) ? 'expand_less' : 'expand_more'}}
             </mat-icon>
           </button>
-          <mat-checkbox class="checkbox-rightside" color="white" (change)="isChecked(node)"></mat-checkbox>
+          <mat-checkbox class="checkbox-rightside" color="white" 
+            (change)="todoItemSelectionToggle(node)"
+            [checked]="node.selected"
+            [indeterminate]="descendantsPartiallySelected(node)"></mat-checkbox>
           <button mat-icon-button ><mat-icon>add</mat-icon></button>
         </div>
 

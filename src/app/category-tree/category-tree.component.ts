@@ -129,11 +129,100 @@ export class CategoryTreeComponent implements OnInit {
     }
   };
 
+  hasNoContent = (_: number, _nodeData: CategoryClass) => _nodeData.name === '';
 
   isChecked(node: CategoryClass) {
     node.selected = !node.selected;
+    
+    const parents = this.getParentNode(this.dataSource.data, node.name);
+
+    for (let parentnode of parents) {
+      this.checkRootNodeSelection(parentnode);
+      this.checklistSelection.select(parentnode);
+    }
   }
 
+  getLevel(data: any[], node: CategoryClass): number {
+    let path = data.find((branch: CategoryClass) => {
+      return this.treeControl
+        .getDescendants(branch)
+        .some(n => n.name === node.name);
+    });
+    return path ? this.getLevel(path.children, node) + 1 : 0 ; 
+  }
 
-  hasNoContent = (_: number, _nodeData: CategoryClass) => _nodeData.name === '';
+  getParentNode(data: CategoryClass[], name: string): any {
+    if (typeof data != "undefined") {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].name === name) {
+          return [data[i]];
+        }
+        const a = this.getParentNode(data[i].children.value, name);
+        if (a !== null) {
+          a.unshift(data[i]);
+          return a;
+        }
+      }
+    }
+    return null;
+  }
+
+  descendantsAllSelected(node: CategoryClass): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected =
+      descendants.length > 0 &&
+      descendants.every((child) => {
+        return this.checklistSelection.isSelected(child);
+      });
+    return descAllSelected;
+  }
+
+  descendantsPartiallySelected(node: CategoryClass): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const result = descendants.some((child) =>
+      this.checklistSelection.isSelected(child)
+    );
+
+    return result && !this.descendantsAllSelected(node);
+  }
+  
+  checkAllParentsSelection(node: CategoryClass): void {
+    let parents = this.getParentNode(this.dataSource.data, node.name);
+    for (let parentnode of parents) {
+      this.checkRootNodeSelection(parentnode);
+      this.checklistSelection.toggle(parentnode)
+    }
+  } 
+
+  checkRootNodeSelection(node: CategoryClass): void {
+    const nodeSelected = this.checklistSelection.isSelected(node);
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected =
+      descendants.length > 0 &&
+      descendants.every((child) => {
+        return this.checklistSelection.isSelected(child);
+      });
+    if (nodeSelected && !descAllSelected) {
+      this.checklistSelection.deselect(node);
+    } else if (!nodeSelected && descAllSelected) {
+      this.checklistSelection.select(node);
+    }
+  }
+
+  todoItemSelectionToggle(node: CategoryClass): void {
+    node.selected = !node.selected;
+    this.checklistSelection.toggle(node);
+    const descendants = this.treeControl.getDescendants(node);
+
+    descendants.forEach((child) => this.checklistSelection.isSelected(child));
+    this.checkAllParentsSelection(node);
+  }
+
+  todoLeafItemSelectionToggle(node: CategoryClass): void {
+    node.selected = !node.selected;
+    this.checklistSelection.toggle(node);
+    console.log("bup")
+    this.checkAllParentsSelection(node);
+    this.descendantsPartiallySelected(node);
+  }
 }
