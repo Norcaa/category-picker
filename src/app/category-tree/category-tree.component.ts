@@ -131,17 +131,6 @@ export class CategoryTreeComponent implements OnInit {
 
   hasNoContent = (_: number, _nodeData: CategoryClass) => _nodeData.name === '';
 
-  isChecked(node: CategoryClass) {
-    node.selected = !node.selected;
-    
-    const parents = this.getParentNode(this.dataSource.data, node.name);
-
-    for (let parentnode of parents) {
-      this.checkRootNodeSelection(parentnode);
-      this.checklistSelection.select(parentnode);
-    }
-  }
-
   getLevel(data: any[], node: CategoryClass): number {
     let path = data.find((branch: CategoryClass) => {
       return this.treeControl
@@ -185,44 +174,23 @@ export class CategoryTreeComponent implements OnInit {
 
     return result && !this.descendantsAllSelected(node);
   }
-  
-  checkAllParentsSelection(node: CategoryClass): void {
-    let parents = this.getParentNode(this.dataSource.data, node.name);
-    for (let parentnode of parents) {
-      this.checkRootNodeSelection(parentnode);
-      this.checklistSelection.toggle(parentnode)
-    }
-  } 
-
-  checkRootNodeSelection(node: CategoryClass): void {
-    const nodeSelected = this.checklistSelection.isSelected(node);
-    const descendants = this.treeControl.getDescendants(node);
-    const descAllSelected =
-      descendants.length > 0 &&
-      descendants.every((child) => {
-        return this.checklistSelection.isSelected(child);
-      });
-    if (nodeSelected && !descAllSelected) {
-      this.checklistSelection.deselect(node);
-    } else if (!nodeSelected && descAllSelected) {
-      this.checklistSelection.select(node);
-    }
-  }
 
   todoItemSelectionToggle(node: CategoryClass): void {
     node.selected = !node.selected;
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
+    this.checklistSelection.isSelected(node)
+      ? this.checklistSelection.select(...descendants)
+      : this.checklistSelection.deselect(...descendants);
 
     descendants.forEach((child) => this.checklistSelection.isSelected(child));
-    this.checkAllParentsSelection(node);
+    //this.checkAllParentsSelection(node);
   }
 
   todoLeafItemSelectionToggle(node: CategoryClass): void {
     node.selected = !node.selected;
     this.checklistSelection.toggle(node);
-    console.log("bup")
-    this.checkAllParentsSelection(node);
-    this.descendantsPartiallySelected(node);
+    console.log('Az adott node: ', this.checklistSelection.isSelected(node));
+    //this.checkAllParentsSelection(node);
   }
 }
