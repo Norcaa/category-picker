@@ -11,7 +11,7 @@ import { unescapeIdentifier } from '@angular/compiler';
 export class CategoryClass {
   categories: CategoryClass[] = [];
 
-  id?: string;
+  id?: number;
   name!: string;
   selected!: boolean;
   children: BehaviorSubject<CategoryClass[]> = new BehaviorSubject<CategoryClass[]>(this.categories);
@@ -98,9 +98,10 @@ export class CategoryDatabase {
     }
   }
 
-  updateItem(node: CategoryClass, name: string) {
-    node.name = name;
-    node.selected = false;
+  updateItem(parent: CategoryClass, node: CategoryClass) {
+    this.categoryService.addCategory(node).subscribe((node) => {
+      parent.children.getValue().push(node);
+    });
     this.dataChange.next(this.data);
   }
 }
@@ -234,18 +235,14 @@ export class CategoryTreeComponent implements OnInit {
     console.log("Szülő: ", parentNode);
 
     const newNode = new CategoryClass();
+      if (node.id) {
+        newNode.id = node.id+1;
+      } else {
+        newNode.id = 11;
+      }
       newNode.name = itemValue;
       newNode.selected = false;
-    console.log("Menteni való: ", newNode);
 
-    parentNode.children.getValue().push({name: itemValue, selected: false} as CategoryClass);
-
-    this.categoryService.addCategory(newNode).subscribe((newNode) => {
-      parentNode.children.getValue().push(newNode);
-      //this.categories.push(newNode);
-      console.log(parentNode.children.getValue());
-    });
-
-    this.database.updateItem(node!, itemValue);
+    this.database.updateItem(parentNode!, newNode);
   }
 }
