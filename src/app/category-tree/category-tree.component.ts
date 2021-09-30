@@ -20,6 +20,15 @@ export class CategoryClass {
     this.categories = this.categories.concat(this.categories, nodes);
     this.children.next(this.categories);
   }
+
+  insertChildren(node: CategoryClass) {
+    console.log("Eredeti: ", this.categories);
+    console.log("Hozzáadás: ", node);
+    console.log("Eredmény: ", this.categories.concat(node));
+    //this.categories = this.categories.concat(this.categories, nodes);
+    this.categories = this.categories.concat(node);
+    this.children.next(this.categories);
+  }
 }
 
 
@@ -75,6 +84,24 @@ export class CategoryDatabase {
     console.log(result);
     console.log("build runned")
     return result;
+  }
+
+  insertItem(parent: CategoryClass, name: string) {
+    if (parent.children) {
+      console.log(parent.children.getValue());
+      const node = new CategoryClass();
+        node.name = name;
+        node.selected = false;
+      parent.insertChildren(node);
+      //parent.children.getValue().push({item: name} as CategoryClass;
+      this.dataChange.next(this.data);
+    }
+  }
+
+  updateItem(node: CategoryClass, name: string) {
+    node.name = name;
+    node.selected = false;
+    this.dataChange.next(this.data);
   }
 }
 
@@ -192,5 +219,33 @@ export class CategoryTreeComponent implements OnInit {
     this.checklistSelection.toggle(node);
     console.log('Az adott node: ', this.checklistSelection.isSelected(node));
     //this.checkAllParentsSelection(node);
+  }
+
+  addNewItem(node: CategoryClass) {
+    const parents = this.getParentNode(this.dataSource.data, node.name);
+    const parentNode = parents[parents.length-1];
+    this.database.insertItem(parentNode!, '');
+    this.treeControl.expand(node);
+  }
+
+  saveNode(node: CategoryClass, itemValue: string) {
+    const parents = this.getParentNode(this.dataSource.data, node.name);
+    const parentNode = parents[parents.length-2];
+    console.log("Szülő: ", parentNode);
+
+    const newNode = new CategoryClass();
+      newNode.name = itemValue;
+      newNode.selected = false;
+    console.log("Menteni való: ", newNode);
+
+    parentNode.children.getValue().push({name: itemValue, selected: false} as CategoryClass);
+
+    this.categoryService.addCategory(newNode).subscribe((newNode) => {
+      parentNode.children.getValue().push(newNode);
+      //this.categories.push(newNode);
+      console.log(parentNode.children.getValue());
+    });
+
+    this.database.updateItem(node!, itemValue);
   }
 }

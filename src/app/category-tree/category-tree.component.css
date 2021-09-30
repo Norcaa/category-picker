@@ -127,3 +127,40 @@ mat-nested-tree-node > li ul li .mat-tree-node:after {
 mat-tree > mat-nested-tree-node > li .mat-tree-node:after {
   border: 0;
 }
+
+/* NEW ITEM */
+.input-form {
+  height: 28px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.new-item-input {
+  background: #ffffff;
+  border: 1px solid #4F4F4F;
+  height: 26px;
+  padding: 1px 8px;
+  position: relative;
+  margin-left: -40px;
+  border-radius: 4px;
+  width: 100%;
+  padding-right: 98px;
+}
+
+.input-form ::placeholder {
+  color: #000;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+.btn-save {
+  color: #232323;
+  font-size: 16px;
+}
+
+.btn-save, .input-form ::placeholder {
+  font-style: normal;
+  font-weight: normal;
+  line-height: 19px;
+}

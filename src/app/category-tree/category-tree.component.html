@@ -20,11 +20,10 @@
       <li>
         <div class="mat-tree-node" >
           <button mat-icon-button disabled></button>
-          <mat-form-field appearance="fill">
-            <mat-label>New item</mat-label>
-            <input matInput #itemValue placeholder="Ex. Lettuce">
-          </mat-form-field>
-          <button mat-button >Save</button>
+          <form class="input-form">
+            <input matInput #itemValue class="new-item-input" placeholder="New item">
+          </form>
+          <button mat-button class="btn-save" (click)="saveNode(node, itemValue.value)">Save</button>
         </div>
       </li>
     </mat-nested-tree-node>
