@@ -6,7 +6,6 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { unescapeIdentifier } from '@angular/compiler';
 
 export class CategoryClass {
   categories: CategoryClass[] = [];
@@ -59,31 +58,21 @@ export class CategoryDatabase {
   }
 
   buildFileTree(obj: { [key: string]: any }, level: number): CategoryClass[] {
-    console.log("objektum:", obj);
-    console.log("kulcsok: ", Object.keys(obj));
-
-    const result = Object.keys(obj).reduce<CategoryClass[]>((accumulator, key) => { 
-
+    return Object.keys(obj).reduce<CategoryClass[]>((accumulator, key) => {
       const value = obj[key];
-      console.log("value:", value);
-
       const node = new CategoryClass();
       node.name = value.name;
-      console.log("name:", value.name);
       node.selected = false;
 
       if (value != null) {
         if (typeof value === 'object' && value.children != null) {
-          node.addchildren(this.buildFileTree(value.children, level + 2));
+          node.addchildren(this.buildFileTree(value.children, level + 1));
         } else {
           node.name = value.name;
         }
       }
-      return accumulator.concat(node);}, 
-    []);
-    console.log(result);
-    console.log("build runned")
-    return result;
+      return accumulator.concat(node);
+    }, []);
   }
 
   insertItem(parent: CategoryClass, name: string) {

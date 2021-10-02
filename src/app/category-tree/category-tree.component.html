@@ -45,7 +45,7 @@
             (change)="todoItemSelectionToggle(node)"
             [checked]="node.selected"
             [indeterminate]="descendantsPartiallySelected(node)"></mat-checkbox>
-          <button mat-icon-button ><mat-icon>add</mat-icon></button>
+            <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
         </div>
 
         <ul class="tree-nested-node">
